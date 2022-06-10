@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+[DEMO LINK](https://innapogrebna.github.io/people-table-react/)
+## Advanced tasks
+Using code from previous task implement next tasks:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Implement `PersonName` component rendering the name as a link to a person using its `slug` property
+    ```
+    /people/carolus-haverbeke-1832
+    ```
+    - It should be used for `name`, `mother` and `father` columns
+    - Use `CSS` `color: rgb(0, 71, 171)` for male name text and  and `color: rgb(255, 0, 0)` for female.
+    - If mother or father were not found in the array by their name show just a name (black, bold) instead of `PersonName` component
+1. Highlight the `PersonRow` mentioned in the URL with some background-color
+    - Highlight nobody if the `slug` in the URL is not found among the people
 
-## Available Scripts
+### Filtering and sorting
+1. Add an `<input>` with `data-cy="filterInput"` attribut to filter people by `name`, `motherName` and `fatherName`
+    - it should update the URL with `?query=car` where `car` is a string entered by the user
+    - Read the `query` from the URL and set its value to the input when the page is loaded
+1. `PeoplePage` should read the `query` from the URL and filter people accordingly
+    - check if the `query` matches the `name`, `motherName` or `fatherName`
+1. Implement the sorting by `name`, `sex`, `born` and `died` by clicking on the cell containing column title
+    - Highlight the column with the *
+    - Add `?sortBy=born` param to the URL
+    - Sort the people by selected column
+    - If the page is loaded with `sortBy` it should be applied (column is highilghted and people are sorted)
+    - If the `sortBy` value is not valid don't highlight any column and don't sort people
 
-In the project directory, you can run:
+## Advanced sorting and filtering
+1. Sort should work together with filtering
+1. The `query` and `sortBy` should stay in the URL when you select a user (keep `location.search` on navigation)
+1. Implement the ability to sort people in both directions `?sortOrder=asc` or `desc`
+    - add [Sort both icon](public/images/sort_both.png) to show that column allows sorting
+    - The first click sorts `ascending` (A-Z) the second sorts `descending` (Z-A)
+    - add `sort_ask` or `sort_desc` icons accordingly to the applied sorting
+1. Update the `query` in the URL with `debounce` of 500ms
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## (* OPTIONAL) Adding a person
+1. (* OPTIONAL) Create a `NewPerson` component with a form to add new people and show it above the table
+    - all the fields should be required for now
+    - `sex` should be chosen among 2 options (radio buttons)
+    - `mother` and `father` are selects with all the `women` and `men` from the table accordingly
+1. (* OPTIONAL) Create an `Add person` button navigating to `/people/new`
+    - the `NewPerson` should appear instead of a button
+    - When the person is added you should navigate back to the `/people` page
+1. (* OPTIONAL) Add data validations:
+    - `name` should contain only letters and spaces
+    - `born` and `died` are valid years between `1400` and the current year
+    - `died` should be disabled if `born` is empty
+    - `died - born` should be >= 0 and < 150
+    - make `mother` and `father` field optional
+    - update the list of `mothers` and `fathers` according to the entered `born` year (they must be alive)
+    (selects should be empty and disabled before the born year was entered)
