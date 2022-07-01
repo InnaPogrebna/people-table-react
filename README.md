@@ -1,4 +1,4 @@
-[DEMO LINK](https://innapogrebna.github.io/people-table-react/)
+## [DEMO LINK](https://innapogrebna.github.io/people-table-react/)
 ## Advanced tasks
 Using code from previous task implement next tasks:
 
